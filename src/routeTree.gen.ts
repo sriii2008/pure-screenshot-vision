@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssetAvailabilityRouteImport } from './routes/asset-availability'
+import { Route as CoordinationRouteImport } from './routes/coordination'
+import { Route as MonthlyPlanRouteImport } from './routes/monthly-plan'
+import { Route as RequestsRouteImport } from './routes/requests'
+import { Route as SimulatorRouteImport } from './routes/simulator'
+import { Route as WeeklyPlanRouteImport } from './routes/weekly-plan'
+import { Route as BlocksIndexRouteImport } from './routes/blocks.index'
+import { Route as BlocksBlockIdRouteImport } from './routes/blocks.$blockId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssetAvailabilityRoute = AssetAvailabilityRouteImport.update({
+  id: '/asset-availability',
+  path: '/asset-availability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoordinationRoute = CoordinationRouteImport.update({
+  id: '/coordination',
+  path: '/coordination',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MonthlyPlanRoute = MonthlyPlanRouteImport.update({
+  id: '/monthly-plan',
+  path: '/monthly-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestsRoute = RequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulatorRoute = SimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeeklyPlanRoute = WeeklyPlanRouteImport.update({
+  id: '/weekly-plan',
+  path: '/weekly-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlocksIndexRoute = BlocksIndexRouteImport.update({
+  id: '/blocks/',
+  path: '/blocks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlocksBlockIdRoute = BlocksBlockIdRouteImport.update({
+  id: '/blocks/$blockId',
+  path: '/blocks/$blockId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/asset-availability': typeof AssetAvailabilityRoute
+  '/coordination': typeof CoordinationRoute
+  '/monthly-plan': typeof MonthlyPlanRoute
+  '/requests': typeof RequestsRoute
+  '/simulator': typeof SimulatorRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
+  '/blocks/$blockId': typeof BlocksBlockIdRoute
+  '/blocks/': typeof BlocksIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/asset-availability': typeof AssetAvailabilityRoute
+  '/coordination': typeof CoordinationRoute
+  '/monthly-plan': typeof MonthlyPlanRoute
+  '/requests': typeof RequestsRoute
+  '/simulator': typeof SimulatorRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
+  '/blocks/$blockId': typeof BlocksBlockIdRoute
+  '/blocks': typeof BlocksIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/asset-availability': typeof AssetAvailabilityRoute
+  '/coordination': typeof CoordinationRoute
+  '/monthly-plan': typeof MonthlyPlanRoute
+  '/requests': typeof RequestsRoute
+  '/simulator': typeof SimulatorRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
+  '/blocks/$blockId': typeof BlocksBlockIdRoute
+  '/blocks/': typeof BlocksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/asset-availability'
+    | '/coordination'
+    | '/monthly-plan'
+    | '/requests'
+    | '/simulator'
+    | '/weekly-plan'
+    | '/blocks/$blockId'
+    | '/blocks/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/asset-availability'
+    | '/coordination'
+    | '/monthly-plan'
+    | '/requests'
+    | '/simulator'
+    | '/weekly-plan'
+    | '/blocks/$blockId'
+    | '/blocks'
+  id:
+    | '__root__'
+    | '/'
+    | '/asset-availability'
+    | '/coordination'
+    | '/monthly-plan'
+    | '/requests'
+    | '/simulator'
+    | '/weekly-plan'
+    | '/blocks/$blockId'
+    | '/blocks/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssetAvailabilityRoute: typeof AssetAvailabilityRoute
+  CoordinationRoute: typeof CoordinationRoute
+  MonthlyPlanRoute: typeof MonthlyPlanRoute
+  RequestsRoute: typeof RequestsRoute
+  SimulatorRoute: typeof SimulatorRoute
+  WeeklyPlanRoute: typeof WeeklyPlanRoute
+  BlocksBlockIdRoute: typeof BlocksBlockIdRoute
+  BlocksIndexRoute: typeof BlocksIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/asset-availability': {
+      id: '/asset-availability'
+      path: '/asset-availability'
+      fullPath: '/asset-availability'
+      preLoaderRoute: typeof AssetAvailabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coordination': {
+      id: '/coordination'
+      path: '/coordination'
+      fullPath: '/coordination'
+      preLoaderRoute: typeof CoordinationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/monthly-plan': {
+      id: '/monthly-plan'
+      path: '/monthly-plan'
+      fullPath: '/monthly-plan'
+      preLoaderRoute: typeof MonthlyPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/requests': {
+      id: '/requests'
+      path: '/requests'
+      fullPath: '/requests'
+      preLoaderRoute: typeof RequestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weekly-plan': {
+      id: '/weekly-plan'
+      path: '/weekly-plan'
+      fullPath: '/weekly-plan'
+      preLoaderRoute: typeof WeeklyPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blocks/': {
+      id: '/blocks/'
+      path: '/blocks'
+      fullPath: '/blocks/'
+      preLoaderRoute: typeof BlocksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blocks/$blockId': {
+      id: '/blocks/$blockId'
+      path: '/blocks/$blockId'
+      fullPath: '/blocks/$blockId'
+      preLoaderRoute: typeof BlocksBlockIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssetAvailabilityRoute: AssetAvailabilityRoute,
+  CoordinationRoute: CoordinationRoute,
+  MonthlyPlanRoute: MonthlyPlanRoute,
+  RequestsRoute: RequestsRoute,
+  SimulatorRoute: SimulatorRoute,
+  WeeklyPlanRoute: WeeklyPlanRoute,
+  BlocksBlockIdRoute: BlocksBlockIdRoute,
+  BlocksIndexRoute: BlocksIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
