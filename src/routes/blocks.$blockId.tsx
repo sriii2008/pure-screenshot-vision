@@ -14,11 +14,6 @@ export const Route = createFileRoute("/blocks/$blockId")({
       { property: "og:description", content: `Full decision record for maintenance block ${params.blockId}.` },
     ],
   }),
-  loader: ({ params }) => {
-    const block = weeklyBlocks.find((b) => b.id === params.blockId);
-    if (!block) throw notFound();
-    return { block };
-  },
   component: BlockDetail,
 });
 
@@ -32,7 +27,9 @@ function Field({ label, value, tone = "" }: { label: string; value: string; tone
 }
 
 function BlockDetail() {
-  const { block } = Route.useLoaderData();
+  const { blockId } = Route.useParams();
+  const block = weeklyBlocks.find((b) => b.id === blockId);
+  if (!block) throw notFound();
   const request = requests.find((r) => r.id === block.requestId);
 
   return (
