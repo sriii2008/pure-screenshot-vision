@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RequestsRouteImport } from './routes/requests'
+import { Route as WeeklyPlanRouteImport } from './routes/weekly-plan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const RequestsRoute = RequestsRouteImport.update({
   path: '/requests',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WeeklyPlanRoute = WeeklyPlanRouteImport.update({
+  id: '/weekly-plan',
+  path: '/weekly-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/requests': typeof RequestsRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/requests': typeof RequestsRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/requests': typeof RequestsRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/requests'
+  fullPaths: '/' | '/requests' | '/weekly-plan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/requests'
-  id: '__root__' | '/' | '/requests'
+  to: '/' | '/requests' | '/weekly-plan'
+  id: '__root__' | '/' | '/requests' | '/weekly-plan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RequestsRoute: typeof RequestsRoute
+  WeeklyPlanRoute: typeof WeeklyPlanRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RequestsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/weekly-plan': {
+      id: '/weekly-plan'
+      path: '/weekly-plan'
+      fullPath: '/weekly-plan'
+      preLoaderRoute: typeof WeeklyPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RequestsRoute: RequestsRoute,
+  WeeklyPlanRoute: WeeklyPlanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
