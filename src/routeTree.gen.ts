@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MonthlyPlanRouteImport } from './routes/monthly-plan'
 import { Route as RequestsRouteImport } from './routes/requests'
 import { Route as WeeklyPlanRouteImport } from './routes/weekly-plan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MonthlyPlanRoute = MonthlyPlanRouteImport.update({
+  id: '/monthly-plan',
+  path: '/monthly-plan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RequestsRoute = RequestsRouteImport.update({
@@ -31,30 +37,34 @@ const WeeklyPlanRoute = WeeklyPlanRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
   '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
   '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
   '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/requests' | '/weekly-plan'
+  fullPaths: '/' | '/monthly-plan' | '/requests' | '/weekly-plan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/requests' | '/weekly-plan'
-  id: '__root__' | '/' | '/requests' | '/weekly-plan'
+  to: '/' | '/monthly-plan' | '/requests' | '/weekly-plan'
+  id: '__root__' | '/' | '/monthly-plan' | '/requests' | '/weekly-plan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MonthlyPlanRoute: typeof MonthlyPlanRoute
   RequestsRoute: typeof RequestsRoute
   WeeklyPlanRoute: typeof WeeklyPlanRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/monthly-plan': {
+      id: '/monthly-plan'
+      path: '/monthly-plan'
+      fullPath: '/monthly-plan'
+      preLoaderRoute: typeof MonthlyPlanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/requests': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MonthlyPlanRoute: MonthlyPlanRoute,
   RequestsRoute: RequestsRoute,
   WeeklyPlanRoute: WeeklyPlanRoute,
 }
