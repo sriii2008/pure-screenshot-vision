@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AssetAvailabilityRouteImport } from './routes/asset-availability'
 import { Route as MonthlyPlanRouteImport } from './routes/monthly-plan'
 import { Route as RequestsRouteImport } from './routes/requests'
+import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as WeeklyPlanRouteImport } from './routes/weekly-plan'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const RequestsRoute = RequestsRouteImport.update({
   path: '/requests',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SimulatorRoute = SimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WeeklyPlanRoute = WeeklyPlanRouteImport.update({
   id: '/weekly-plan',
   path: '/weekly-plan',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/asset-availability': typeof AssetAvailabilityRoute
   '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
+  '/simulator': typeof SimulatorRoute
   '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/asset-availability': typeof AssetAvailabilityRoute
   '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
+  '/simulator': typeof SimulatorRoute
   '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRoutesById {
@@ -61,21 +69,33 @@ export interface FileRoutesById {
   '/asset-availability': typeof AssetAvailabilityRoute
   '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
+  '/simulator': typeof SimulatorRoute
   '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/asset-availability' | '/monthly-plan' | '/requests' | '/weekly-plan'
+    | '/'
+    | '/asset-availability'
+    | '/monthly-plan'
+    | '/requests'
+    | '/simulator'
+    | '/weekly-plan'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/asset-availability' | '/monthly-plan' | '/requests' | '/weekly-plan'
+    | '/'
+    | '/asset-availability'
+    | '/monthly-plan'
+    | '/requests'
+    | '/simulator'
+    | '/weekly-plan'
   id:
     | '__root__'
     | '/'
     | '/asset-availability'
     | '/monthly-plan'
     | '/requests'
+    | '/simulator'
     | '/weekly-plan'
   fileRoutesById: FileRoutesById
 }
@@ -84,6 +104,7 @@ export interface RootRouteChildren {
   AssetAvailabilityRoute: typeof AssetAvailabilityRoute
   MonthlyPlanRoute: typeof MonthlyPlanRoute
   RequestsRoute: typeof RequestsRoute
+  SimulatorRoute: typeof SimulatorRoute
   WeeklyPlanRoute: typeof WeeklyPlanRoute
 }
 
@@ -117,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RequestsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/weekly-plan': {
       id: '/weekly-plan'
       path: '/weekly-plan'
@@ -132,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssetAvailabilityRoute: AssetAvailabilityRoute,
   MonthlyPlanRoute: MonthlyPlanRoute,
   RequestsRoute: RequestsRoute,
+  SimulatorRoute: SimulatorRoute,
   WeeklyPlanRoute: WeeklyPlanRoute,
 }
 export const routeTree = rootRouteImport
