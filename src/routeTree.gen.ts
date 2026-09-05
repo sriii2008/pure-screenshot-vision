@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AssetAvailabilityRouteImport } from './routes/asset-availability'
+import { Route as CoordinationRouteImport } from './routes/coordination'
 import { Route as MonthlyPlanRouteImport } from './routes/monthly-plan'
 import { Route as RequestsRouteImport } from './routes/requests'
 import { Route as SimulatorRouteImport } from './routes/simulator'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const AssetAvailabilityRoute = AssetAvailabilityRouteImport.update({
   id: '/asset-availability',
   path: '/asset-availability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoordinationRoute = CoordinationRouteImport.update({
+  id: '/coordination',
+  path: '/coordination',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MonthlyPlanRoute = MonthlyPlanRouteImport.update({
@@ -50,6 +56,7 @@ const WeeklyPlanRoute = WeeklyPlanRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/asset-availability': typeof AssetAvailabilityRoute
+  '/coordination': typeof CoordinationRoute
   '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
   '/simulator': typeof SimulatorRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/asset-availability': typeof AssetAvailabilityRoute
+  '/coordination': typeof CoordinationRoute
   '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
   '/simulator': typeof SimulatorRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/asset-availability': typeof AssetAvailabilityRoute
+  '/coordination': typeof CoordinationRoute
   '/monthly-plan': typeof MonthlyPlanRoute
   '/requests': typeof RequestsRoute
   '/simulator': typeof SimulatorRoute
@@ -77,6 +86,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/asset-availability'
+    | '/coordination'
     | '/monthly-plan'
     | '/requests'
     | '/simulator'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/asset-availability'
+    | '/coordination'
     | '/monthly-plan'
     | '/requests'
     | '/simulator'
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/asset-availability'
+    | '/coordination'
     | '/monthly-plan'
     | '/requests'
     | '/simulator'
@@ -102,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssetAvailabilityRoute: typeof AssetAvailabilityRoute
+  CoordinationRoute: typeof CoordinationRoute
   MonthlyPlanRoute: typeof MonthlyPlanRoute
   RequestsRoute: typeof RequestsRoute
   SimulatorRoute: typeof SimulatorRoute
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/asset-availability'
       fullPath: '/asset-availability'
       preLoaderRoute: typeof AssetAvailabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coordination': {
+      id: '/coordination'
+      path: '/coordination'
+      fullPath: '/coordination'
+      preLoaderRoute: typeof CoordinationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/monthly-plan': {
@@ -158,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssetAvailabilityRoute: AssetAvailabilityRoute,
+  CoordinationRoute: CoordinationRoute,
   MonthlyPlanRoute: MonthlyPlanRoute,
   RequestsRoute: RequestsRoute,
   SimulatorRoute: SimulatorRoute,
